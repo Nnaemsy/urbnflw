@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - URBNFLW</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Darker gray-blue background */
+            color: #e5e7eb; /* Light gray text */
+        }
+        .font-game { font-family: 'Press Start 2P', cursive; }
+
+        /* Enhanced Button Styles */
+        .btn {
+            @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900;
+        }
+        .btn-primary {
+            @apply bg-gradient-to-r from-green-400 to-teal-500 text-white hover:from-green-500 hover:to-teal-600 hover:scale-105 focus:ring-green-500;
+        }
+        .btn-secondary {
+            @apply bg-gray-600 text-gray-100 hover:bg-gray-500 hover:scale-105 focus:ring-gray-500;
+        }
+         .btn-outline {
+            @apply bg-transparent border border-green-400 text-green-400 hover:bg-green-400 hover:text-gray-900 focus:ring-green-400 px-4 py-2 text-xs;
+         }
+         .btn-icon {
+             @apply p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-200;
+         }
+
+        /* Header & Navigation */
+        header { @apply sticky top-0 z-50 bg-gray-800 bg-opacity-95 backdrop-blur-sm shadow-lg; }
+        nav a { @apply px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200; }
+        nav a.active { @apply bg-green-600 text-white; } /* Active link style */
+        .logo { @apply text-3xl font-bold text-green-400; }
+
+        /* Currency Selector */
+        #currency-selector {
+             @apply bg-gray-700 border border-gray-600 text-white text-xs rounded-lg focus:ring-green-500 focus:border-green-500 block w-auto p-1.5 ml-4;
+        }
+
+        /* Product Card Styles */
+        .product-card {
+            @apply bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02];
+        }
+        .product-card img { @apply w-full h-52 object-cover; } /* Slightly taller images */
+        .product-card .content { @apply p-5; } /* More padding */
+        .product-card .title { @apply text-lg font-semibold mb-1 text-white hover:text-green-400 transition-colors; }
+        .product-card .price { @apply text-xl text-green-400 font-bold mb-3; } /* Larger price */
+        .product-card .sizes span { @apply inline-block border border-gray-600 rounded px-2 py-1 text-xs mr-1 mb-1; }
+        .product-card .sizes span.out-of-stock { @apply border-red-600 text-red-600 line-through opacity-70; }
+
+        /* Filter/Sort Styles */
+        .filter-button {
+            @apply px-4 py-1.5 rounded-md text-xs font-medium transition-colors duration-200 mr-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900;
+        }
+        .filter-button.active { @apply bg-green-500 text-white shadow-sm; }
+        .filter-button.inactive { @apply bg-gray-700 hover:bg-gray-600 text-gray-300; }
+        #sort-by {
+             @apply bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full md:w-auto p-2.5;
+        }
+
+        /* Footer */
+        footer { @apply bg-gray-800 text-gray-400 py-8 mt-16 border-t border-gray-700; }
+        footer a { @apply hover:text-green-400 transition-colors; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <header class="py-3">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="https://placehold.co/150x50/1a2e2a/7fdbca?text=URBNFLW" alt="URBNFLW Logo" class="h-10 md:h-12 rounded" onerror="this.onerror=null; this.src='https://placehold.co/150x50/111827/ffffff?text=Logo+Error';">
+            </a>
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <a href="index.html#explore">Explore</a>
+                <a href="events.html">Events</a>
+                <a href="community.html">Community</a>
+                <a href="shop.html" class="active">Shop</a> <a href="#more">More ▾</a>
+                 <select id="currency-selector" aria-label="Select Currency">
+                    <option value="EUR">€ EUR</option>
+                    <option value="USD">$ USD</option>
+                    <option value="GBP">£ GBP</option>
+                </select>
+            </nav>
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="shop.html" class="btn btn-secondary">Shop</a>
+                <a href="#signup" class="btn btn-primary">Join</a>
+                <button aria-label="User Profile" class="btn-icon">
+                    <i class="fas fa-user"></i>
+                </button>
+                 <button aria-label="Shopping Cart" class="btn-icon relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span> </button>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden btn-icon" aria-label="Open Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700 px-4 pt-2 pb-4 space-y-2">
+            <a href="index.html#explore" class="block px-3 py-2 rounded hover:bg-gray-700">Explore</a>
+            <a href="events.html" class="block px-3 py-2 rounded hover:bg-gray-700">Events</a>
+            <a href="community.html" class="block px-3 py-2 rounded hover:bg-gray-700">Community</a>
+            <a href="shop.html" class="block px-3 py-2 rounded bg-green-600 text-white">Shop</a> <a href="#more" class="block px-3 py-2 rounded hover:bg-gray-700">More ▾</a>
+            <div class="pt-2">
+                 <label for="currency-selector-mobile" class="sr-only">Select Currency</label>
+                 <select id="currency-selector-mobile" class="bg-gray-700 border border-gray-600 text-white text-xs rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-1.5 mb-3">
+                    <option value="EUR">€ EUR</option>
+                    <option value="USD">$ USD</option>
+                    <option value="GBP">£ GBP</option>
+                 </select>
+            </div>
+            <hr class="border-gray-600 my-2">
+            <a href="shop.html" class="block text-center w-full btn btn-secondary mb-2">Shop</a>
+            <a href="#signup" class="block text-center w-full btn btn-primary mb-2">Join</a>
+            <button aria-label="User Profile" class="flex items-center justify-center w-full p-2 rounded hover:bg-gray-700 text-gray-300">
+                <i class="fas fa-user mr-2"></i> Profile
+            </button>
+             <button aria-label="Shopping Cart" class="flex items-center justify-center w-full p-2 rounded hover:bg-gray-700 text-gray-300 relative">
+                <i class="fas fa-shopping-cart mr-2"></i> Cart
+                <span class="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-12">
+
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-10 text-white">Shop URBNFLW Gear</h1>
+
+        <section id="filters" class="mb-8 p-4 bg-gray-800 rounded-lg shadow-md md:flex md:justify-between md:items-center">
+            <div class="mb-4 md:mb-0">
+                <h2 class="text-lg font-semibold mb-3 text-white sr-only md:not-sr-only">Categories</h2>
+                <div class="flex flex-wrap">
+                    <button class="filter-button active">All</button>
+                    <button class="filter-button inactive">Skates</button>
+                    <button class="filter-button inactive">Protection</button>
+                    <button class="filter-button inactive">Apparel</button>
+                    <button class="filter-button inactive">Accessories</button>
+                </div>
+            </div>
+
+            <div>
+                <label for="sort-by" class="sr-only">Sort By</label>
+                <select id="sort-by" name="sort-by">
+                    <option selected>Sort By: Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="newest">Newest Arrivals</option>
+                    <option value="rating">Average Rating</option>
+                </select>
+            </div>
+        </section>
+
+        <section id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+
+            <article class="product-card">
+                <a href="product-detail.html" aria-label="View details for URBNFLW Classic Hoodie">
+                    <img src="https://placehold.co/400x300/1a2e2a/334d46?text=Classic+Hoodie" alt="URBNFLW Classic Hoodie placeholder" onerror="this.onerror=null; this.src='https://placehold.co/400x300/111827/ffffff?text=Image+Error';">
+                </a>
+                <div class="content">
+                    <a href="product-detail.html">
+                        <h3 class="title">URBNFLW Classic Hoodie</h3>
+                    </a>
+                    <p class="price product-price" data-price-eur="59.99">€59.99</p>
+                    <div class="sizes text-gray-400 text-xs mb-3">Sizes:
+                        <span>S</span> <span>M</span> <span>L</span> <span>XL</span>
+                    </div>
+                    <a href="product-detail.html" class="btn-outline w-full text-center block mt-2">View Details</a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <a href="product-detail.html" aria-label="View details for Pro Skate Package">
+                     <img src="https://placehold.co/400x300/1a2e2a/334d46?text=Pro+Skate+Package" alt="Pro Skate Package placeholder" onerror="this.onerror=null; this.src='https://placehold.co/400x300/111827/ffffff?text=Image+Error';">
+                </a>
+                <div class="content">
+                    <a href="product-detail.html">
+                        <h3 class="title">Pro Skate Package</h3>
+                    </a>
+                    <p class="price product-price" data-price-eur="249.99">€249.99</p>
+                    <div class="sizes text-gray-400 text-xs mb-3">Sizes:
+                        <span>36</span> <span>37</span> <span>38</span> <span>39</span> <span>40</span> <span>41</span>
+                    </div>
+                     <a href="product-detail.html" class="btn-outline w-full text-center block mt-2">View Details</a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                 <a href="product-detail.html" aria-label="View details for Safety Kit Premium">
+                     <img src="https://placehold.co/400x300/1a2e2a/334d46?text=Safety+Kit" alt="Safety Kit Premium placeholder" onerror="this.onerror=null; this.src='https://placehold.co/400x300/111827/ffffff?text=Image+Error';">
+                 </a>
+                <div class="content">
+                     <a href="product-detail.html">
+                        <h3 class="title">Safety Kit Premium</h3>
+                     </a>
+                    <p class="price product-price" data-price-eur="89.99">€89.99</p>
+                     <div class="sizes text-gray-400 text-xs mb-3">Sizes:
+                        <span>S</span> <span class="out-of-stock">M</span> <span>L</span>
+                    </div>
+                     <a href="product-detail.html" class="btn-outline w-full text-center block mt-2">View Details</a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                 <a href="product-detail.html" aria-label="View details for Urban Street Deck">
+                    <img src="https://placehold.co/400x300/1a2e2a/334d46?text=Street+Deck" alt="Street Skateboard Deck placeholder" onerror="this.onerror=null; this.src='https://placehold.co/400x300/111827/ffffff?text=Image+Error';">
+                 </a>
+                <div class="content">
+                    <a href="product-detail.html">
+                        <h3 class="title">Urban Street Deck</h3>
+                    </a>
+                    <p class="price product-price" data-price-eur="75.00">€75.00</p>
+                     <div class="sizes text-gray-400 text-xs mb-3">Width:
+                        <span>8.0"</span> <span>8.25"</span> <span>8.5"</span>
+                    </div>
+                     <a href="product-detail.html" class="btn-outline w-full text-center block mt-2">View Details</a>
+                </div>
+            </article>
+
+             <article class="product-card">
+                 <a href="product-detail.html" aria-label="View details for All-in-One Skate Tool">
+                    <img src="https://placehold.co/400x300/1a2e2a/334d46?text=Skate+Tool" alt="Skate Tool placeholder" onerror="this.onerror=null; this.src='https://placehold.co/400x300/111827/ffffff?text=Image+Error';">
+                 </a>
+                <div class="content">
+                    <a href="product-detail.html">
+                        <h3 class="title">All-in-One Skate Tool</h3>
+                    </a>
+                    <p class="price product-price" data-price-eur="15.99">€15.99</p>
+                     <div class="sizes text-gray-400 text-xs mb-3">Color:
+                        <span>Black</span> <span>Silver</span> <span class="text-green-400">Green</span>
+                    </div>
+                     <a href="product-detail.html" class="btn-outline w-full text-center block mt-2">View Details</a>
+                </div>
+            </article>
+
+            </section>
+
+        <nav aria-label="Page navigation" class="mt-12 flex justify-center">
+          <ul class="inline-flex items-center -space-x-px shadow-sm">
+            <li>
+              <a href="#" class="py-2 px-3 ml-0 leading-tight text-gray-400 bg-gray-800 rounded-l-lg border border-gray-700 hover:bg-gray-700 hover:text-white">
+                <span class="sr-only">Previous</span>
+                <i class="fas fa-chevron-left text-xs"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-current="page" class="z-10 py-2 px-3 leading-tight text-white border border-green-600 bg-green-500 hover:bg-green-600">1</a>
+            </li>
+            <li>
+              <a href="#" class="py-2 px-3 leading-tight text-gray-400 bg-gray-800 border border-gray-700 hover:bg-gray-700 hover:text-white">2</a>
+            </li>
+            <li>
+              <a href="#" class="py-2 px-3 leading-tight text-gray-400 bg-gray-800 border border-gray-700 hover:bg-gray-700 hover:text-white">3</a>
+            </li>
+            <li>
+              <a href="#" class="py-2 px-3 leading-tight text-gray-400 bg-gray-800 rounded-r-lg border border-gray-700 hover:bg-gray-700 hover:text-white">
+                 <span class="sr-only">Next</span>
+                 <i class="fas fa-chevron-right text-xs"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+    </main>
+
+    <footer>
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4 space-x-4">
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+            </div>
+            <div class="flex justify-center space-x-6 mb-4">
+                 <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-instagram"></i></a>
+                 <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-twitter"></i></a>
+                 <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-facebook-f"></i></a>
+                 <a href="#" aria-label="TikTok" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="text-sm">&copy; <span id="current-year"></span> URBNFLW. All Rights Reserved.</p>
+            <p class="text-xs mt-1">Designed for the London Skate Community.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Constants ---
+        const CURRENCY_STORAGE_KEY = 'urbnflw_currency';
+        const EXCHANGE_RATES = {
+            EUR: 1,
+            USD: 1.1, // Example Rate: 1 EUR = 1.1 USD
+            GBP: 0.85 // Example Rate: 1 EUR = 0.85 GBP
+        };
+        const CURRENCY_SYMBOLS = {
+            EUR: '€',
+            USD: '$',
+            GBP: '£'
+        };
+
+        // --- DOM Elements ---
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const currencySelector = document.getElementById('currency-selector');
+        const currencySelectorMobile = document.getElementById('currency-selector-mobile');
+        const priceElements = document.querySelectorAll('.product-price'); // Select all price elements
+
+        // --- Functions ---
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            // Toggle ARIA expanded state if needed
+            const isExpanded = !mobileMenu.classList.contains('hidden');
+            menuButton.setAttribute('aria-expanded', isExpanded);
+        }
+
+        // Close Mobile Menu if clicking outside
+        function closeMenuOnClickOutside(event) {
+            if (!mobileMenu.classList.contains('hidden')) {
+                const isClickInsideMenu = mobileMenu.contains(event.target);
+                const isClickOnButton = menuButton.contains(event.target);
+                if (!isClickInsideMenu && !isClickOnButton) {
+                    toggleMobileMenu();
+                }
+            }
+        }
+
+        // Format Price according to currency
+        function formatPrice(amount, currency) {
+            const symbol = CURRENCY_SYMBOLS[currency] || '';
+            // Basic formatting, consider Intl.NumberFormat for more complex needs
+            return `${symbol}${amount.toFixed(2)}`;
+        }
+
+        // Update all prices on the page
+        function updatePrices(selectedCurrency) {
+            if (!EXCHANGE_RATES[selectedCurrency]) return; // Invalid currency
+
+            const rate = EXCHANGE_RATES[selectedCurrency];
+
+            priceElements.forEach(el => {
+                const basePriceEur = parseFloat(el.dataset.priceEur);
+                if (!isNaN(basePriceEur)) {
+                    const convertedPrice = basePriceEur * rate;
+                    el.textContent = formatPrice(convertedPrice, selectedCurrency);
+                }
+            });
+        }
+
+        // Handle Currency Change
+        function handleCurrencyChange(event) {
+            const newCurrency = event.target.value;
+            localStorage.setItem(CURRENCY_STORAGE_KEY, newCurrency); // Save preference
+            updatePrices(newCurrency);
+            // Sync desktop and mobile selectors if both exist
+            if (currencySelector && currencySelectorMobile) {
+                if (event.target.id === 'currency-selector') {
+                    currencySelectorMobile.value = newCurrency;
+                } else {
+                    currencySelector.value = newCurrency;
+                }
+            }
+        }
+
+         // Basic JS for Filter Buttons (Example)
+        function handleFilterClick(event) {
+             if (!event.target.classList.contains('filter-button')) return;
+
+             const filterButtons = document.querySelectorAll('#filters .filter-button');
+             // Remove active class from all buttons
+             filterButtons.forEach(btn => {
+                 btn.classList.remove('active');
+                 btn.classList.add('inactive');
+             });
+             // Add active class to the clicked button
+             event.target.classList.remove('inactive');
+             event.target.classList.add('active');
+             // Add logic here to filter products based on the category
+             console.log('Filter by:', event.target.textContent);
+         }
+
+        // Set Current Year in Footer
+        function setFooterYear() {
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        }
+
+        // --- Initialization ---
+        function initialize() {
+            // Set footer year
+            setFooterYear();
+
+            // Event Listeners
+            menuButton.addEventListener('click', toggleMobileMenu);
+            document.addEventListener('click', closeMenuOnClickOutside);
+
+            if (currencySelector) {
+                currencySelector.addEventListener('change', handleCurrencyChange);
+            }
+            if (currencySelectorMobile) {
+                 currencySelectorMobile.addEventListener('change', handleCurrencyChange);
+            }
+
+            const filterContainer = document.getElementById('filters');
+            if (filterContainer) {
+                 filterContainer.addEventListener('click', handleFilterClick);
+            }
+
+
+            // Load and apply saved currency preference
+            const savedCurrency = localStorage.getItem(CURRENCY_STORAGE_KEY) || 'EUR'; // Default to EUR
+            if (currencySelector) currencySelector.value = savedCurrency;
+            if (currencySelectorMobile) currencySelectorMobile.value = savedCurrency;
+            updatePrices(savedCurrency);
+        }
+
+        // --- Run Initialization ---
+        // Use DOMContentLoaded to ensure elements are loaded before running scripts
+        document.addEventListener('DOMContentLoaded', initialize);
+
+    </script>
+
+</body>
+</html>

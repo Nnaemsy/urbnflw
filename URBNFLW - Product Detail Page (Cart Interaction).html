@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - URBNFLW</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Darker gray-blue background */
+            color: #e5e7eb; /* Light gray text */
+        }
+        .font-game { font-family: 'Press Start 2P', cursive; }
+
+        /* Enhanced Button Styles */
+        .btn {
+            @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900;
+        }
+        .btn-primary {
+            @apply bg-gradient-to-r from-green-400 to-teal-500 text-white hover:from-green-500 hover:to-teal-600 hover:scale-105 focus:ring-green-500;
+        }
+        .btn-secondary {
+            @apply bg-gray-600 text-gray-100 hover:bg-gray-500 hover:scale-105 focus:ring-gray-500;
+        }
+        .btn-icon {
+             @apply p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-200;
+         }
+         /* Style for Add to Cart button feedback */
+        .btn-add-to-cart.added {
+            @apply bg-green-600 cursor-not-allowed;
+        }
+
+        /* Header & Navigation */
+        header { @apply sticky top-0 z-50 bg-gray-800 bg-opacity-95 backdrop-blur-sm shadow-lg; }
+        nav a { @apply px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200; }
+        nav a.active { @apply bg-green-600 text-white; } /* Active link style */
+        .logo { @apply text-3xl font-bold text-green-400; }
+
+         /* Currency Selector */
+        #currency-selector {
+             @apply bg-gray-700 border border-gray-600 text-white text-xs rounded-lg focus:ring-green-500 focus:border-green-500 block w-auto p-1.5 ml-4;
+        }
+        /* Cart Count Badge */
+        .cart-count-badge {
+             @apply absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center transition-transform duration-200;
+        }
+         .cart-count-badge.updated {
+             @apply scale-125; /* Pulse effect */
+         }
+
+        /* Product Detail Specific Styles */
+        .size-option, .color-option-label {
+            @apply border border-gray-600 rounded px-3 py-1.5 text-sm mr-2 mb-2 cursor-pointer transition-colors duration-200 hover:border-green-400 focus:outline-none focus:ring-1 focus:ring-green-400;
+        }
+        .size-option.selected, .color-option-label.selected {
+            @apply bg-green-500 border-green-500 text-white ring-1 ring-green-500;
+        }
+        /* Style for color swatch itself */
+        .color-swatch {
+            @apply h-6 w-6 rounded-full border-2 border-transparent ring-1 ring-offset-1 ring-offset-gray-800 transition-all;
+        }
+        .color-option-label.selected .color-swatch {
+             @apply ring-green-400 ring-2; /* Highlight selected color */
+        }
+
+        .quantity-input {
+            @apply w-16 text-center bg-gray-700 border border-gray-600 rounded p-1.5 focus:ring-1 focus:ring-green-500 focus:border-green-500;
+        }
+        .details-icon { @apply w-5 h-5 inline-block mr-2 text-green-400 flex-shrink-0; }
+        .review-stars { @apply text-yellow-400; }
+        .thumbnail {
+            @apply w-1/4 rounded cursor-pointer border-2 border-transparent hover:border-green-400 transition-all duration-200 opacity-70 hover:opacity-100;
+        }
+        .thumbnail.selected {
+            @apply border-green-400 opacity-100 scale-105;
+        }
+         /* Added to cart message */
+        #added-to-cart-message {
+            @apply text-center text-green-400 font-semibold mt-2 text-sm opacity-0 transition-opacity duration-500;
+        }
+        #added-to-cart-message.visible {
+             @apply opacity-100;
+        }
+
+        /* Footer */
+        footer { @apply bg-gray-800 text-gray-400 py-8 mt-16 border-t border-gray-700; }
+        footer a { @apply hover:text-green-400 transition-colors; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <header class="py-3">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <img src="https://placehold.co/150x50/1a2e2a/7fdbca?text=URBNFLW" alt="URBNFLW Logo" class="h-10 md:h-12 rounded" onerror="this.onerror=null; this.src='https://placehold.co/150x50/111827/ffffff?text=Logo+Error';">
+            </a>
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <a href="index.html#explore">Explore</a>
+                <a href="events.html">Events</a>
+                <a href="community.html">Community</a>
+                <a href="shop.html">Shop</a> <a href="#more">More ▾</a>
+                 <select id="currency-selector" aria-label="Select Currency">
+                    <option value="EUR">€ EUR</option>
+                    <option value="USD">$ USD</option>
+                    <option value="GBP">£ GBP</option>
+                </select>
+            </nav>
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="shop.html" class="btn btn-secondary">Shop</a>
+                <a href="#signup" class="btn btn-primary">Join</a>
+                 <button aria-label="User Profile" class="btn-icon">
+                    <i class="fas fa-user"></i>
+                </button>
+                 <button id="cart-button-desktop" aria-label="Shopping Cart" class="btn-icon relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count-badge-desktop" class="cart-count-badge">0</span> </button>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden btn-icon" aria-label="Open Menu" aria-expanded="false">
+                 <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700 px-4 pt-2 pb-4 space-y-2">
+            <a href="index.html#explore" class="block px-3 py-2 rounded hover:bg-gray-700">Explore</a>
+            <a href="events.html" class="block px-3 py-2 rounded hover:bg-gray-700">Events</a>
+            <a href="community.html" class="block px-3 py-2 rounded hover:bg-gray-700">Community</a>
+            <a href="shop.html" class="block px-3 py-2 rounded hover:bg-gray-700">Shop</a>
+            <a href="#more" class="block px-3 py-2 rounded hover:bg-gray-700">More ▾</a>
+             <div class="pt-2">
+                 <label for="currency-selector-mobile" class="sr-only">Select Currency</label>
+                 <select id="currency-selector-mobile" class="bg-gray-700 border border-gray-600 text-white text-xs rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-1.5 mb-3">
+                    <option value="EUR">€ EUR</option>
+                    <option value="USD">$ USD</option>
+                    <option value="GBP">£ GBP</option>
+                 </select>
+            </div>
+            <hr class="border-gray-600 my-2">
+            <a href="shop.html" class="block text-center w-full btn btn-secondary mb-2">Shop</a>
+            <a href="#signup" class="block text-center w-full btn btn-primary mb-2">Join</a>
+            <button aria-label="User Profile" class="flex items-center justify-center w-full p-2 rounded hover:bg-gray-700 text-gray-300">
+                <i class="fas fa-user mr-2"></i> Profile
+            </button>
+             <button id="cart-button-mobile" aria-label="Shopping Cart" class="flex items-center justify-center w-full p-2 rounded hover:bg-gray-700 text-gray-300 relative">
+                <i class="fas fa-shopping-cart mr-2"></i> Cart
+                <span id="cart-count-badge-mobile" class="cart-count-badge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-12">
+
+        <section class="md:flex md:space-x-8 lg:space-x-12">
+
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <div class="mb-4 overflow-hidden rounded-lg shadow-lg">
+                    <img id="main-product-image" src="https://placehold.co/600x500/1a2e2a/334d46?text=Classic+Hoodie+Main" alt="URBNFLW Classic Hoodie - Main View" class="w-full h-auto object-cover transition-transform duration-300 ease-in-out hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x500/111827/ffffff?text=Image+Error';">
+                </div>
+                <div id="thumbnail-container" class="flex space-x-2 justify-center">
+                    <button class="thumbnail selected" data-image-src="https://placehold.co/600x500/1a2e2a/334d46?text=Classic+Hoodie+Main" aria-label="View Hoodie Front">
+                        <img src="https://placehold.co/100x80/1a2e2a/334d46?text=Thumb+1" alt="Hoodie Thumbnail 1" class="w-full h-full object-cover rounded" onerror="this.parentElement.style.display='none'">
+                    </button>
+                    <button class="thumbnail" data-image-src="https://placehold.co/600x500/1a2e2a/445d56?text=Hoodie+Back" aria-label="View Hoodie Back">
+                        <img src="https://placehold.co/100x80/1a2e2a/445d56?text=Thumb+2" alt="Hoodie Thumbnail 2" class="w-full h-full object-cover rounded" onerror="this.parentElement.style.display='none'">
+                    </button>
+                    <button class="thumbnail" data-image-src="https://placehold.co/600x500/1a2e2a/556d66?text=Hoodie+Detail" aria-label="View Hoodie Detail">
+                        <img src="https://placehold.co/100x80/1a2e2a/556d66?text=Thumb+3" alt="Hoodie Thumbnail 3" class="w-full h-full object-cover rounded" onerror="this.parentElement.style.display='none'">
+                    </button>
+                     <button class="thumbnail" data-image-src="https://placehold.co/600x500/1a2e2a/667d76?text=Hoodie+Lifestyle" aria-label="View Hoodie Lifestyle">
+                         <img src="https://placehold.co/100x80/1a2e2a/667d76?text=Thumb+4" alt="Hoodie Thumbnail 4" class="w-full h-full object-cover rounded" onerror="this.parentElement.style.display='none'">
+                    </button>
+                </div>
+            </div>
+
+            <div class="md:w-1/2">
+                <h1 class="text-3xl md:text-4xl font-bold mb-2 text-white">URBNFLW Classic Hoodie</h1>
+                <div class="flex items-center mb-4">
+                    <div class="review-stars mr-2" aria-label="Rated 4.5 out of 5 stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="#reviews" class="text-sm text-gray-400 hover:underline">(124 Reviews)</a>
+                </div>
+                <p class="text-3xl font-bold text-green-400 mb-6 product-price" data-price-eur="59.99">€59.99</p>
+
+                <div class="mb-6">
+                    <label id="size-label" class="block text-sm font-medium text-gray-300 mb-2">Size:</label>
+                    <div class="flex flex-wrap" id="size-options" role="radiogroup" aria-labelledby="size-label">
+                        <button role="radio" aria-checked="false" class="size-option" data-value="S">S</button>
+                        <button role="radio" aria-checked="true" class="size-option selected" data-value="M">M</button> <button role="radio" aria-checked="false" class="size-option" data-value="L">L</button>
+                        <button role="radio" aria-checked="false" class="size-option" data-value="XL">XL</button>
+                        <button role="radio" aria-checked="false" class="size-option" data-value="XXL">XXL</button>
+                    </div>
+                </div>
+
+                 <div class="mb-6">
+                    <label id="color-label" class="block text-sm font-medium text-gray-300 mb-2">Color: <span id="selected-color-name" class="font-semibold">Black</span></label>
+                    <div class="flex flex-wrap space-x-2" id="color-options" role="radiogroup" aria-labelledby="color-label">
+                        <button role="radio" aria-checked="true" class="color-option-label selected" data-value="Black" aria-label="Select Black color">
+                            <span class="color-swatch bg-black"></span>
+                        </button>
+                        <button role="radio" aria-checked="false" class="color-option-label" data-value="Grey" aria-label="Select Grey color">
+                             <span class="color-swatch bg-gray-600"></span>
+                        </button>
+                        <button role="radio" aria-checked="false" class="color-option-label" data-value="Forest Green" aria-label="Select Forest Green color">
+                             <span class="color-swatch bg-green-700"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="quantity" class="block text-sm font-medium text-gray-300 mb-2">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" class="quantity-input" aria-label="Product quantity">
+                </div>
+
+                <button id="add-to-cart-button" class="btn btn-primary btn-add-to-cart w-full text-lg mb-1">
+                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                </button>
+                <div id="added-to-cart-message" role="status" aria-live="polite">Item added to cart!</div>
+
+                <div class="mt-8 border-t border-gray-700 pt-6">
+                    <h2 class="text-xl font-semibold mb-3 text-white">Product Details</h2>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        Premium quality hoodie featuring the iconic URBNFLW design. Perfect for skating sessions or casual wear. Made from 100% organic cotton with a soft brushed interior for maximum comfort.
+                    </p>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check details-icon mt-1"></i><span>100% Organic Cotton</span></li>
+                        <li class="flex items-start"><i class="fas fa-check details-icon mt-1"></i><span>Soft Brushed Interior</span></li>
+                        <li class="flex items-start"><i class="fas fa-check details-icon mt-1"></i><span>Ribbed Cuffs & Hem</span></li>
+                        <li class="flex items-start"><i class="fas fa-check details-icon mt-1"></i><span>Kangaroo Pocket</span></li>
+                        <li class="flex items-start"><i class="fas fa-check details-icon mt-1"></i><span>Adjustable Drawstring Hood</span></li>
+                        <li class="flex items-start"><i class="fas fa-tshirt details-icon mt-1"></i><span>Regular Fit</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="mt-16 border-t border-gray-700 pt-8">
+             <h2 class="text-2xl font-bold mb-6 text-white">Customer Reviews</h2>
+            <div class="bg-gray-800 p-5 rounded-lg shadow mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-semibold text-white">Skater_Dude_88</span>
+                    <span class="text-xs text-gray-400">2 days ago</span>
+                </div>
+                <div class="review-stars mb-2" aria-label="Rated 5 out of 5 stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-300 leading-relaxed">Super comfy hoodie, great quality for the price. Perfect for chilly evening skates. The logo looks sick too!</p>
+            </div>
+             <div class="bg-gray-800 p-5 rounded-lg shadow mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-semibold text-white">RollinRachel</span>
+                    <span class="text-xs text-gray-400">1 week ago</span>
+                </div>
+                <div class="review-stars mb-2" aria-label="Rated 4 out of 5 stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> </div>
+                <p class="text-gray-300 leading-relaxed">Really like the hoodie, it's soft and fits well (got a Medium). Wish the green color option was available when I ordered though.</p>
+            </div>
+            <div class="text-center mt-6">
+                 <a href="#all-reviews" class="text-green-400 hover:underline font-semibold">See all 124 reviews</a>
+            </div>
+        </section>
+
+    </main>
+
+     <footer>
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4 space-x-4">
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+            </div>
+            <div class="flex justify-center space-x-6 mb-4">
+                 <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-instagram"></i></a>
+                 <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-twitter"></i></a>
+                 <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-facebook-f"></i></a>
+                 <a href="#" aria-label="TikTok" class="text-gray-400 hover:text-green-400 text-xl"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="text-sm">&copy; <span id="current-year"></span> URBNFLW. All Rights Reserved.</p>
+            <p class="text-xs mt-1">Designed for the London Skate Community.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Constants ---
+        const CURRENCY_STORAGE_KEY = 'urbnflw_currency';
+        const CART_COUNT_KEY = 'urbnflw_cart_count'; // Key for localStorage cart count
+        const EXCHANGE_RATES = { EUR: 1, USD: 1.1, GBP: 0.85 };
+        const CURRENCY_SYMBOLS = { EUR: '€', USD: '$', GBP: '£' };
+
+        // --- DOM Elements ---
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const currencySelector = document.getElementById('currency-selector');
+        const currencySelectorMobile = document.getElementById('currency-selector-mobile');
+        const priceElements = document.querySelectorAll('.product-price'); // Price on this page
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnailContainer = document.getElementById('thumbnail-container');
+        const sizeOptionsContainer = document.getElementById('size-options');
+        const colorOptionsContainer = document.getElementById('color-options');
+        const selectedColorNameEl = document.getElementById('selected-color-name');
+        const addToCartButton = document.getElementById('add-to-cart-button');
+        const addedMessage = document.getElementById('added-to-cart-message');
+        const cartCountBadgeDesktop = document.getElementById('cart-count-badge-desktop');
+        const cartCountBadgeMobile = document.getElementById('cart-count-badge-mobile');
+        const quantityInput = document.getElementById('quantity');
+
+
+        // --- Functions ---
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            const isExpanded = !mobileMenu.classList.contains('hidden');
+            menuButton.setAttribute('aria-expanded', isExpanded);
+        }
+
+        // Close Mobile Menu if clicking outside
+        function closeMenuOnClickOutside(event) {
+             if (!mobileMenu.classList.contains('hidden')) {
+                const isClickInsideMenu = mobileMenu.contains(event.target);
+                const isClickOnButton = menuButton.contains(event.target);
+                if (!isClickInsideMenu && !isClickOnButton) {
+                    toggleMobileMenu();
+                }
+            }
+        }
+
+        // Format Price
+        function formatPrice(amount, currency) {
+            const symbol = CURRENCY_SYMBOLS[currency] || '';
+            return `${symbol}${amount.toFixed(2)}`;
+        }
+
+        // Update Prices
+        function updatePrices(selectedCurrency) {
+            if (!EXCHANGE_RATES[selectedCurrency]) return;
+            const rate = EXCHANGE_RATES[selectedCurrency];
+            priceElements.forEach(el => {
+                const basePriceEur = parseFloat(el.dataset.priceEur);
+                if (!isNaN(basePriceEur)) {
+                    const convertedPrice = basePriceEur * rate;
+                    el.textContent = formatPrice(convertedPrice, selectedCurrency);
+                }
+            });
+        }
+
+        // Handle Currency Change
+        function handleCurrencyChange(event) {
+            const newCurrency = event.target.value;
+            localStorage.setItem(CURRENCY_STORAGE_KEY, newCurrency);
+            updatePrices(newCurrency);
+             if (currencySelector && currencySelectorMobile) { // Sync selectors
+                if (event.target.id === 'currency-selector') currencySelectorMobile.value = newCurrency;
+                else currencySelector.value = newCurrency;
+            }
+        }
+
+        // Image Gallery Thumbnail Click
+        function handleThumbnailClick(event) {
+             const button = event.target.closest('.thumbnail');
+             if (!button || !mainImage) return;
+
+             const newImageSrc = button.dataset.imageSrc;
+             if (newImageSrc) {
+                 mainImage.src = newImageSrc;
+                 // Update selected state for thumbnails
+                 thumbnailContainer.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('selected'));
+                 button.classList.add('selected');
+             }
+        }
+
+         // Option Selection Logic (Generic for Size/Color)
+        function handleOptionSelection(container, optionSelector, selectedClass) {
+             container.addEventListener('click', (event) => {
+                 const targetButton = event.target.closest(optionSelector);
+                 if (targetButton) {
+                    // Update ARIA checked state and class for all options
+                    container.querySelectorAll(optionSelector).forEach(btn => {
+                        const isSelected = btn === targetButton;
+                        btn.classList.toggle(selectedClass, isSelected);
+                        btn.setAttribute('aria-checked', isSelected);
+                    });
+
+                     // Update color name display if it's the color selector
+                     if (optionSelector === '.color-option-label' && selectedColorNameEl) {
+                         selectedColorNameEl.textContent = targetButton.dataset.value;
+                     }
+                 }
+             });
+        }
+
+        // Update Cart Count Display
+        function updateCartCountDisplay(count) {
+            if (cartCountBadgeDesktop) cartCountBadgeDesktop.textContent = count;
+            if (cartCountBadgeMobile) cartCountBadgeMobile.textContent = count;
+
+            // Optional: Add a small visual cue on update
+             if (cartCountBadgeDesktop) {
+                cartCountBadgeDesktop.classList.add('updated');
+                setTimeout(() => cartCountBadgeDesktop.classList.remove('updated'), 300); // Remove pulse effect
+             }
+             if (cartCountBadgeMobile) {
+                 cartCountBadgeMobile.classList.add('updated');
+                 setTimeout(() => cartCountBadgeMobile.classList.remove('updated'), 300);
+             }
+        }
+
+        // Handle Add to Cart Click
+        function handleAddToCart(event) {
+            event.preventDefault(); // Prevent form submission if it's inside a form
+
+            const currentCount = parseInt(localStorage.getItem(CART_COUNT_KEY) || '0');
+            const quantityToAdd = parseInt(quantityInput.value) || 1; // Get quantity from input
+            const newCount = currentCount + quantityToAdd;
+
+            localStorage.setItem(CART_COUNT_KEY, newCount); // Store updated count
+            updateCartCountDisplay(newCount); // Update UI
+
+            // Provide user feedback
+            if (addedMessage) {
+                addedMessage.classList.add('visible');
+                // Optionally hide message after a delay
+                setTimeout(() => addedMessage.classList.remove('visible'), 3000);
+            }
+            // Optional: Disable button temporarily or change text
+            addToCartButton.textContent = 'Added!';
+            addToCartButton.classList.add('added');
+            addToCartButton.disabled = true;
+            setTimeout(() => {
+                 addToCartButton.textContent = 'Add to Cart';
+                 addToCartButton.classList.remove('added');
+                 addToCartButton.disabled = false;
+            }, 2000); // Reset button after 2 seconds
+
+            console.log(`Added ${quantityToAdd} item(s) to cart. New count: ${newCount}`);
+        }
+
+
+        // Set Current Year in Footer
+        function setFooterYear() {
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) yearElement.textContent = new Date().getFullYear();
+        }
+
+        // --- Initialization ---
+        function initialize() {
+            setFooterYear();
+
+            // Event Listeners
+            menuButton.addEventListener('click', toggleMobileMenu);
+            document.addEventListener('click', closeMenuOnClickOutside);
+
+            if (currencySelector) currencySelector.addEventListener('change', handleCurrencyChange);
+            if (currencySelectorMobile) currencySelectorMobile.addEventListener('change', handleCurrencyChange);
+            if (thumbnailContainer) thumbnailContainer.addEventListener('click', handleThumbnailClick);
+            if (addToCartButton) addToCartButton.addEventListener('click', handleAddToCart);
+
+            // Initialize option selectors
+            if (sizeOptionsContainer) handleOptionSelection(sizeOptionsContainer, '.size-option', 'selected');
+            if (colorOptionsContainer) handleOptionSelection(colorOptionsContainer, '.color-option-label', 'selected');
+
+            // Load and apply saved currency preference
+            const savedCurrency = localStorage.getItem(CURRENCY_STORAGE_KEY) || 'EUR';
+            if (currencySelector) currencySelector.value = savedCurrency;
+             if (currencySelectorMobile) currencySelectorMobile.value = savedCurrency;
+            updatePrices(savedCurrency);
+
+            // Load and display initial cart count
+            const initialCartCount = parseInt(localStorage.getItem(CART_COUNT_KEY) || '0');
+            updateCartCountDisplay(initialCartCount);
+        }
+
+        // --- Run Initialization ---
+        document.addEventListener('DOMContentLoaded', initialize);
+
+    </script>
+
+</body>
+</html>
